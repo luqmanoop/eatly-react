@@ -1,0 +1,38 @@
+{
+  "name": "stark-foods",
+  "version": "1.0.0",
+  "description": "A food delivery service app for a (fictional) restaurant built using ReactJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeshifu/stark-foods.git"
+  },
+  "keywords": [],
+  "author": "Luqman Olushi <olushilukmon03@gmail.com> (https://codeshifu.github.io/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeshifu/stark-foods/issues"
+  },
+  "homepage": "https://github.com/codeshifu/stark-foods#readme",
+  "dependencies": {
+    "prop-types": "15.6.2",
+    "react": "16.7.0",
+    "react-dom": "16.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "7.2.3",
+    "@babel/preset-env": "7.2.3",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.4",
+    "html-webpack-plugin": "3.2.0",
+    "webpack": "4.28.2",
+    "webpack-cli": "3.1.2",
+    "webpack-dev-server": "3.1.14"
+  }
+}
