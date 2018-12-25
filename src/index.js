@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import './css/style.css';
 import reducers from './reducers';
-import App from './components/App';
+import AppRouter from './routes';
 
 const store = createStore(reducers);
 
 const appProvider = (
   <Provider store={store}>
-    <App />
+    <AppRouter />
   </Provider>
 );
 
