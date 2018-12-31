@@ -4,9 +4,8 @@
   "description": "A food delivery service app for a (fictional) restaurant built using ReactJS",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server -d",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
