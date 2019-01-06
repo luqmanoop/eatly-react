@@ -1,0 +1,263 @@
+$text-color: #707070;
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  *,
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+html,
+body {
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #333;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace, sans-serif;
+  background-color: #f0eeee;
+  font-weight: 400;
+  line-height: 1.6em;
+  font-size: 1.4rem;
+  color: $text-color;
+  padding-bottom: 5rem;
+}
+.p-title {
+  padding: 1.6rem 0;
+}
+.header {
+  background-color: #34465d;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+}
+.links {
+  display: flex;
+  align-items: center;
+  .link-group {
+    display: flex;
+    &.g1 {
+      flex: 1;
+    }
+  }
+}
+
+.link {
+  &.brand {
+    background: #273547;
+    margin-right: 0.8rem;
+    img {
+      padding: 0.4rem 0.8rem 0;
+      width: 5.8rem;
+      object-fit: cover;
+    }
+  }
+  a {
+    color: #fff;
+    display: block;
+    height: 100%;
+    padding: 0 1rem;
+  }
+}
+
+.link:hover a {
+  color: #f0eeee;
+}
+
+.link.brand:hover a {
+  color: #fff;
+}
+.main,
+.container {
+  max-width: 100rem;
+  margin: 0 auto;
+}
+.main {
+  background: #fff;
+  min-height: 95vh;
+  padding: 7.8rem 1.6rem;
+  position: relative;
+}
+
+a {
+  color: #777777;
+}
+.btn {
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 0.5rem;
+  line-height: 1.4rem;
+  color: #333;
+  cursor: pointer;
+
+  &.btn-success,
+  &.btn-danger,
+  &.btn-warning,
+  &.btn-default {
+    padding: 0.8rem;
+  }
+
+  &.btn-default {
+    border: 0.1rem solid #ccc;
+    background: #fff;
+    &:hover {
+      background: #f0eeee;
+    }
+  }
+
+  &.btn-success,
+  &.btn-danger,
+  &.btn-warning {
+    color: #fff;
+  }
+  &.btn-success {
+    background: #009688;
+    &:hover {
+      background: #00796b;
+    }
+  }
+  &.btn-warning {
+    background: #f57c00;
+    &:hover {
+      background: darken(#f57c00, 10%);
+    }
+  }
+  &.btn-danger {
+    background: #f44336;
+    &:hover {
+      background: #d32f2f;
+    }
+  }
+}
+
+.center {
+  max-width: 100rem;
+  margin: 0 auto;
+}
+.footer {
+  background: #34465d;
+  padding: 0.8rem;
+  color: #f7f7f7;
+  font-size: 1.3rem;
+  text-align: center;
+}
+.flash {
+  padding: 1.6rem;
+  margin: -1.6rem -1.6rem 1.6rem;
+  display: none;
+  position: fixed;
+  z-index: 3;
+  top: 6.8rem;
+  width: 100rem;
+  font-size: 1.3rem;
+}
+.flash__msg {
+  text-align: center;
+  color: #fff;
+  padding: 0.8rem;
+  flex: 1;
+}
+.flash__close {
+  font-size: 2.8rem;
+  color: #eee;
+  cursor: pointer;
+  position: relative;
+  top: 0.8rem;
+}
+.flash.success {
+  background-color: #009688;
+}
+.flash.error {
+  background-color: #d32f2f;
+}
+.modal,
+.loader {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  padding: 1.6rem;
+}
+.modal-content {
+  max-width: 40rem;
+  background: #fff;
+  border-radius: 0.3rem;
+  padding: 1.6rem;
+  position: relative;
+}
+.modal-content > *:not(:last-child) {
+  margin-bottom: 0.8rem;
+}
+.modal-content__btns {
+  text-align: right;
+}
+
+@-webkit-keyframes spin {
+  to {
+    stroke-dashoffset: -264;
+  }
+}
+
+@keyframes spin {
+  to {
+    stroke-dashoffset: -264;
+  }
+}
+.spinner circle {
+  fill: none;
+  stroke: slategray;
+  stroke-width: 16;
+  stroke-linecap: round;
+  stroke-dasharray: 0, 0, 70, 194;
+  stroke-dashoffset: 0;
+  animation: spin 0.6s infinite linear;
+  -webkit-animation: spin 0.6s infinite linear;
+}
+@media screen and (max-width: 1000px) {
+  .flash {
+    width: auto;
+    left: 0;
+    right: 1.6rem;
+  }
+}
+@media screen and (max-width: 425px) {
+  .main {
+    padding-top: 5.6rem;
+  }
+  .btn-success,
+  .btn-danger,
+  .btn-warning,
+  .btn-default {
+    padding: 0.8rem;
+    font-size: 1.4rem;
+  }
+
+  .footer {
+    font-size: 1.26rem;
+  }
+}

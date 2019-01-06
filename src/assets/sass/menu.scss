@@ -1,0 +1,75 @@
+.restaurant-menu {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: -1.6rem;
+  margin-right: -1.6rem;
+}
+.menu {
+  flex-basis: calc(33.3% - 3.2rem);
+  margin: 0 1.6rem 3.2rem;
+  padding: 1.6rem;
+  box-shadow: 0.1rem 0.25rem 0.8rem #ccc;
+}
+.menu > *:not(:last-child) {
+  margin-bottom: 0.8rem;
+}
+.menu__img {
+  height: 20rem;
+  background: #ccc;
+}
+.menu__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.menu__name {
+  width: 23rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.menu__btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fab {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  background: #ff9800;
+  color: #fff;
+  font-size: 2.4rem;
+  padding: 1.6rem 2rem;
+  box-shadow: 0.1rem 0.15rem 1.6rem rgba(83, 83, 83, 0.8);
+  border-radius: 50%;
+}
+@media screen and (max-width: 768px) {
+  .menu {
+    flex-basis: calc(50% - 3.2rem);
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .restaurant {
+    margin-top: -1.6rem;
+  }
+  .menu {
+    flex-basis: 100%;
+    margin: 0;
+    padding: 1.6rem;
+    box-shadow: none;
+    border-bottom: 1px solid #f0eeee;
+  }
+  .menu__img {
+    height: 18rem;
+  }
+  .menu__name {
+    width: auto;
+    white-space: normal;
+  }
+  .fab {
+    right: 2rem;
+    bottom: 2rem;
+  }
+}

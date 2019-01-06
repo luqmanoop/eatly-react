@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-
+import MenuList from './container/MenuList';
 class App extends Component {
   render() {
-    return <div>Hello React</div>;
+    return (
+      <>
+        <MenuList />
+      </>
+    );
   }
 }
 
