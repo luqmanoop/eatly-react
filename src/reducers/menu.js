@@ -8,7 +8,7 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case GET_ALL_MENU:
-      return [...state, ...payload].reverse();
+      return [...payload].reverse();
     default:
       return [...state].reverse();
   }

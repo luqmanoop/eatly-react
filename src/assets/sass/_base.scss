@@ -216,7 +216,10 @@ a {
 .modal-content__btns {
   text-align: right;
 }
-
+.hint {
+  font-size: 1.3rem;
+  margin: 0.5rem;
+}
 @-webkit-keyframes spin {
   to {
     stroke-dashoffset: -264;

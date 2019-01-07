@@ -10,6 +10,9 @@ const Navbar = () => {
           <Link to="/" className="link brand">
             <img src={logo} alt="Eatly logo" />
           </Link>
+          <li className="link">
+            <Link to="/login">Login</Link>
+          </li>
         </ul>
       </nav>
     </header>
