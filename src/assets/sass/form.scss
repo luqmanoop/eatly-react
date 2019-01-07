@@ -1,0 +1,69 @@
+form {
+  width: 80%;
+  margin: 0 auto;
+}
+form .form-title {
+  margin: 0.8rem 0;
+  font-size: 2.4rem;
+}
+form .form-sub-title {
+  margin: 0 0 1.6rem;
+  font-size: 1.26rem;
+}
+.input-group {
+  margin-bottom: 1.6rem;
+}
+.input-group label {
+  display: block;
+  margin: 0.4rem 0;
+  white-space: nowrap;
+}
+.input-group label > .required {
+  color: #d32f2f;
+  position: relative;
+  left: -0.5rem;
+  top: 0.2rem;
+}
+.input-group label > .hint {
+  font-size: 1.12rem;
+}
+.input-group input {
+  height: 3.6rem;
+  width: 100%;
+}
+.input-group textarea {
+  width: 100%;
+  resize: none;
+  min-height: 10rem;
+}
+.input-group input,
+.input-group textarea {
+  border: 1px solid #ccc;
+  padding: 0.8rem;
+  font-size: 1.6rem;
+}
+.input-group span.error {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #d32f2f;
+  display: none;
+}
+form .result {
+  margin-bottom: 0.8rem;
+  padding: 0.8rem;
+  display: none;
+}
+form .result.error {
+  background-color: #5d4037;
+  color: #fff;
+}
+.input-group button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 425px) {
+  form {
+    width: 100%;
+  }
+}
