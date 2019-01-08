@@ -2,9 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import Button from './Button';
 
-const Menu = props => {
+const Menu = (props) => {
   const {
-    menu: { name, imgurl, price }
+    menu: { name, imgurl, price },
   } = props;
 
   return (
@@ -24,8 +24,12 @@ const Menu = props => {
   );
 };
 
+Menu.defaultProps = {
+  menu: {},
+};
+
 Menu.propTypes = {
-  menu: propTypes.object.isRequired
+  menu: propTypes.oneOfType([propTypes.object]),
 };
 
 export default Menu;

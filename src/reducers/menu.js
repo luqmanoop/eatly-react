@@ -1,4 +1,5 @@
-import { default as types } from '../actions/types';
+import types from '../actions/types';
+
 const { GET_ALL_MENU } = types;
 
 const initialState = [];

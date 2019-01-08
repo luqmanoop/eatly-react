@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "no-console": 1,
+    "react/button-has-type": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelAttributes": "htmlFor",
+        "controlComponent": "Field",
+        "dept": 2
+      }
+    ]
+  }
+}

@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 import { getAllMenu } from '../../actions/index';
 import Menu from '../presentation/Menu';
 
 class MenuList extends Component {
   state = {
-    loading: true
+    loading: true,
   };
 
   async componentDidMount() {
-    await this.props.getAllMenu();
+    const { getAllMenu: fetchAllMenu } = this.props;
+    await fetchAllMenu();
     this.setState({ loading: false });
   }
 
   render() {
     const {
       state: { loading },
-      props: { allMenu }
+      props: { allMenu },
     } = this;
 
     return (
@@ -33,9 +35,19 @@ class MenuList extends Component {
   }
 }
 
+MenuList.defaultProps = {
+  getAllMenu: () => {},
+  allMenu: [],
+};
+
+MenuList.propTypes = {
+  getAllMenu: propTypes.func,
+  allMenu: propTypes.arrayOf(propTypes.string),
+};
+
 const mapStateToProps = ({ allMenu }) => ({ allMenu });
 
 export default connect(
   mapStateToProps,
-  { getAllMenu }
+  { getAllMenu },
 )(MenuList);
