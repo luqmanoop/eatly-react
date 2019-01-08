@@ -42,7 +42,7 @@ MenuList.defaultProps = {
 
 MenuList.propTypes = {
   getAllMenu: propTypes.func,
-  allMenu: propTypes.arrayOf(propTypes.string),
+  allMenu: propTypes.arrayOf(propTypes.object),
 };
 
 const mapStateToProps = ({ allMenu }) => ({ allMenu });
