@@ -7,7 +7,7 @@ import './assets/sass/style.scss';
 import reducers from './reducers';
 import AppRouter from './routes';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
 const appProvider = (
@@ -16,4 +16,4 @@ const appProvider = (
   </Provider>
 );
 
-ReactDOM.render(appProvider, document.getElementById('app'));
+ReactDOM.render(appProvider, document.getElementById('app')); // eslint-disable-line

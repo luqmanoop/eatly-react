@@ -4,5 +4,5 @@ import menuReducer from './menu';
 
 export default combineReducers({
   allMenu: menuReducer,
-  form: formReducer
+  form: formReducer,
 });

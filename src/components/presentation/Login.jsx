@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import LoginForm from '../container/LoginForm';
 
 class Login extends Component {
-  handleLogin = values => {
-    console.log(values);
-  };
+  handleLogin = () => {};
+
   render() {
     return (
       <div>
