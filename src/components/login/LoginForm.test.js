@@ -1,9 +1,9 @@
 import React from 'react';
-import { renderWithRedux } from '../../src/utils';
+import { renderWithRedux } from '../../utils';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
 
-import LoginForm from '../../src/components/container/LoginForm';
+import LoginForm from './LoginForm';
 
 describe('<LoginForm />', () => {
   test('renders properly', () => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { getAllMenu } from '../../actions/index';
-import Menu from '../presentation/Menu';
+import Menu from './Menu';
 
 class MenuList extends Component {
   state = {

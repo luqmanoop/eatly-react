@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuList from './container/MenuList';
+import MenuList from './menu/MenuList';
 
 export default () => (
   <>
