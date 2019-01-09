@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginForm from '../container/LoginForm';
+import LoginForm from './LoginForm';
 
 class Login extends Component {
   handleLogin = () => {};

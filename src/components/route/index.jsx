@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import App from '../components/App';
-import Navbar from '../components/presentation/Navbar';
-import Login from '../components/presentation/Login';
+import App from '../App';
+import Navbar from '../presentation/Navbar';
+import Login from '../login/Login';
 
 const NoMatch = () => <div>404 not found</div>;
 

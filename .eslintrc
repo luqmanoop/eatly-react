@@ -5,6 +5,7 @@
     "no-console": 1,
     "react/button-has-type": 0,
     "jsx-a11y/label-has-for": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/label-has-associated-control": [
       2,
       {
@@ -13,5 +14,9 @@
         "dept": 2
       }
     ]
+  },
+  "env": {
+    "jest": true,
+    "browser": true
   }
 }

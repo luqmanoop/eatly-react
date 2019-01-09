@@ -1,14 +1,14 @@
 import React from 'react';
-import { wait, waitForElement } from 'react-testing-library';
+import { wait } from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
-import axios from '../../src/utils/axiosInstance';
 import MockAdapter from 'axios-mock-adapter';
-import MenuList from '../../src/components/container/MenuList';
-import { renderWithRedux } from '../../src/utils';
+import axios from '../../utils/axiosInstance';
+import MenuList from './MenuList';
+import { renderWithRedux } from '../../utils';
 
 const axiosMock = new MockAdapter(axios, {
-  delayResponse: Math.random() * 100
+  delayResponse: Math.random() * 100,
 });
 
 afterAll(axiosMock.restore);
@@ -19,8 +19,8 @@ test('list', async () => {
       id: 1,
       name: 'rice',
       imgurl: 'https://pix.io/rice.jpg',
-      price: 300
-    }
+      price: 300,
+    },
   ]);
 
   const { queryByTestId, container } = renderWithRedux(<MenuList />);
