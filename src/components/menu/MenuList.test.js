@@ -1,7 +1,5 @@
 import React from 'react';
 import { wait } from 'react-testing-library';
-import 'react-testing-library/cleanup-after-each';
-import 'jest-dom/extend-expect';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../../utils/axiosInstance';
 import MenuList from './MenuList';

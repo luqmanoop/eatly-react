@@ -1,13 +1,13 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import propTypes from 'prop-types';
-import Input from '../presentation/Input';
-import Button from '../presentation/Button';
+import Input from '../../presentation/Input';
+import Button from '../../presentation/Button';
 
 const LoginForm = ({ handleSubmit }) => (
-  <form className="form" onSubmit={handleSubmit}>
+  <form className="form login" onSubmit={handleSubmit}>
     <h1 className="form-title">Login</h1>
-    <p className="form-sub-title">Enjoy Eatly fast food delivered to your doorstep</p>
+    <h3 className="form-sub-title">Enjoy Eatly fast food delivered to your doorstep</h3>
     <div className="input-group">
       <label htmlFor="email">Email</label>
       <Field name="email" id="email" component={Input} type="email" />
@@ -17,7 +17,7 @@ const LoginForm = ({ handleSubmit }) => (
       <Field name="password" id="password" component={Input} type="password" />
     </div>
     <div className="input-group">
-      <Button title="Login" classes="btn-danger" type="submit" />
+      <Button title="Login" classes="btn btn-success" type="submit" />
     </div>
   </form>
 );
