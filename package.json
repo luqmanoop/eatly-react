@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server -d",
     "build": "webpack --mode production",
+    "coverage": "jest --coverage",
     "test": "jest"
   },
   "repository": {
