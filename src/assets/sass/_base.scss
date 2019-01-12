@@ -69,11 +69,16 @@ body {
       object-fit: cover;
     }
   }
-  a {
+  a,
+  button {
     color: #fff;
     display: block;
     height: 100%;
     padding: 0 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.4rem;
   }
 }
 

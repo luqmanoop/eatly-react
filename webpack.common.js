@@ -1,11 +1,14 @@
 const path = require('path');
+/* eslint-disable */
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+/* eslint-enable */
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
   module: {
@@ -26,18 +29,12 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: './index.html',
     }),
   ],
-  devServer: {
-    clientLogLevel: 'none',
-    historyApiFallback: true,
-    port: 3000,
-    open: true,
-    compress: true,
-  },
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
   },

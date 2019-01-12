@@ -42,11 +42,21 @@ form .form-sub-title {
   padding: 0.8rem;
   font-size: 1.6rem;
 }
+.input-group input.has-error,
+.input-group textarea.has-error {
+  border-color: #d32f2f;
+}
 .input-group span.error {
   font-size: 1.1rem;
   font-weight: 600;
   color: #d32f2f;
-  display: none;
+}
+.form-error {
+  background: #efd9da;
+  padding: 0.8rem;
+  color: #642828;
+  margin: 0 0 0.8rem;
+  display: block;
 }
 form .result {
   margin-bottom: 0.8rem;

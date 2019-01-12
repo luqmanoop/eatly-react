@@ -1,10 +1,13 @@
 import React from 'react';
-import propType from 'prop-types';
+import PropTypes from 'prop-types';
 
-const Button = ({ title, classes, type }) => {
+const Button = (props) => {
+  const {
+    title, classes, type, handleClick, disabled,
+  } = props;
   const classNames = `btn ${classes}`;
   return (
-    <button type={type} className={classNames}>
+    <button disabled={disabled} onClick={handleClick} type={type} className={classNames}>
       {title}
     </button>
   );
@@ -13,12 +16,16 @@ const Button = ({ title, classes, type }) => {
 Button.defaultProps = {
   type: 'button',
   classes: '',
+  handleClick: () => {},
+  disabled: false,
 };
 
 Button.propTypes = {
-  type: propType.oneOf(['submit', 'button']),
-  title: propType.string.isRequired,
-  classes: propType.string,
+  type: PropTypes.oneOf(['submit', 'button']),
+  title: PropTypes.string.isRequired,
+  classes: PropTypes.string,
+  handleClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default Button;
