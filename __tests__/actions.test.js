@@ -47,14 +47,14 @@ describe('Redux actions', () => {
   });
 
   describe('signUp()', () => {
-    const payload = { id: 1, email: 'try@m.com', token: 'fakeToken' };
+    const payload = { user: { id: 1, email: 'try@m.com', token: 'fakeToken' } };
 
-    test('should dispatch with user payload', async () => {
+    test('should dispatch signup and get current user', async () => {
       await axiosMock.onPost().replyOnce(201, payload);
       await signUp()(dispatch);
-      expect(dispatch).toBeCalledTimes(1);
-      delete payload.token;
-      expect(dispatch).toHaveBeenCalledWith({ type: SIGN_UP, payload: { user: payload } });
+      expect(dispatch).toBeCalledTimes(2);
+      delete payload.user.token;
+      expect(dispatch).toHaveBeenCalledWith({ type: SIGN_UP, payload: { user: payload.user } });
     });
 
     test('logoutUser', () => {
@@ -82,13 +82,15 @@ describe('Redux actions', () => {
       expect(dispatch).toHaveBeenCalledWith({ type: LOG_IN, payload: { error } });
     });
 
-    test('fail to dispatch login action', async () => {
-      const payload = { token: 'fakeToken' };
+    test('dispatch login action and get current user', async () => {
+      const payload = { user: { id: 1, token: 'fakeToken' } };
       await axiosMock.onPost().replyOnce(200, payload);
 
       await login()(dispatch);
-      expect(dispatch).toHaveBeenCalledTimes(1);
-      expect(dispatch).toHaveBeenCalledWith({ type: LOG_IN, payload });
+      expect(authUtils.getToken()).toBe(payload.user.token);
+      delete payload.user.token;
+      expect(dispatch).toHaveBeenCalledTimes(2);
+      expect(dispatch).toHaveBeenCalledWith({ type: LOG_IN, payload: { user: payload.user } });
     });
   });
 });
