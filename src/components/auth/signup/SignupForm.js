@@ -33,7 +33,7 @@ class SignupForm extends Component {
       <form className="form signup" onSubmit={handleSubmit(this.submit)}>
         <h1 className="form-title">Register</h1>
         <h3 className="form-sub-title">Order delicious fast food delivered to your doorstep</h3>
-        {auth && auth.error && <span className="form-error">{auth.error}</span>}
+        {auth && auth.error && <span className="form-error">{auth.error.message}</span>}
         <Field
           validate={[_required, _minValue3]}
           id={fullname[0]}

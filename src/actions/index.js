@@ -1,10 +1,8 @@
 import axios from '../utils/axiosInstance';
-import types from './types';
 import authUtils from '../utils/auth';
-
-const {
-  GET_ALL_MENU, SIGN_UP, GET_USER, LOG_OUT,
-} = types;
+import {
+  GET_ALL_MENU, SIGN_UP, LOG_IN, GET_CURRENT_USER, LOG_OUT,
+} from './types';
 
 export const getAllMenu = () => async (dispatch) => {
   const { data } = await axios('/menu');
@@ -17,12 +15,17 @@ export const signUp = formData => dispatch => axios
     authUtils.saveToken(token);
     dispatch({ type: SIGN_UP, payload: { user } });
   })
-  .catch(({ response: { data: { message } } }) => dispatch({ type: SIGN_UP, payload: message }));
+  .catch(error => dispatch({ type: SIGN_UP, payload: { error } }));
+
+export const login = credentials => async dispatch => axios
+  .post('/auth/login', credentials)
+  .then(({ data }) => dispatch({ type: LOG_IN, payload: data }))
+  .catch(error => dispatch({ type: LOG_IN, payload: { error } }));
 
 export const getCurrentUser = () => dispatch => axios
   .get('/users/me')
-  .then(({ data }) => dispatch({ type: GET_USER, payload: data }))
-  .catch(() => dispatch({ type: GET_USER }));
+  .then(({ data }) => dispatch({ type: GET_CURRENT_USER, payload: data }))
+  .catch(() => dispatch({ type: GET_CURRENT_USER }));
 
 export const logoutUser = () => {
   authUtils.removeToken();
