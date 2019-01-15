@@ -1,6 +1,7 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import Menu from './Menu';
+import { renderWithRedux } from '../../utils';
 
 describe('<Menu />', () => {
   const props = {
@@ -9,20 +10,20 @@ describe('<Menu />', () => {
     price: 300,
   };
 
-  let renderResult = {};
+  let component = {};
 
   beforeEach(() => {
-    renderResult = render(<Menu menu={props} />);
+    component = renderWithRedux(<Menu menu={props} />);
   });
 
   test('renders', () => {
-    const { getByTestId } = render(<Menu menu={{}} />);
+    const { getByTestId } = component;
     expect(getByTestId('menu')).toBeInTheDocument();
   });
 
   test('receives props and render children', () => {
     const { price, name, imgurl } = props;
-    const { container, getByAltText } = renderResult;
+    const { container, getByAltText } = component;
 
     expect(container.querySelector('.menu__name')).toHaveTextContent(name);
     expect(container.querySelector('.menu__price')).toHaveTextContent(price);
@@ -31,7 +32,12 @@ describe('<Menu />', () => {
   });
 
   test('renders composite component', () => {
-    const { container } = renderResult;
+    const { container } = component;
     expect(container.querySelectorAll('button.btn.btn-default').length).toBe(2);
+  });
+
+  test('add to cart', () => {
+    const { getByText } = component;
+    fireEvent.click(getByText(/add item/i));
   });
 });

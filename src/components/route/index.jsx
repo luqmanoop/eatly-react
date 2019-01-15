@@ -6,14 +6,18 @@ import App from '../App';
 import Navbar from '../presentation/Navbar';
 import Login from '../auth/login/Login';
 import Signup from '../auth/signup/Signup';
-import { getCurrentUser } from '../../actions';
+import { getCurrentUser, getCartItemsCount } from '../../actions';
 
 const NoMatch = () => <div>404 not found</div>;
 
 class AppRouter extends Component {
   componentDidMount() {
-    const { getCurrentUser: dispatchGetCurrentUser } = this.props;
+    const {
+      getCurrentUser: dispatchGetCurrentUser,
+      getCartItemsCount: dispatchGetCartItemsCount,
+    } = this.props;
     dispatchGetCurrentUser();
+    dispatchGetCartItemsCount();
   }
 
   render() {
@@ -37,13 +41,15 @@ class AppRouter extends Component {
 
 AppRouter.defaultProps = {
   getCurrentUser: () => {},
+  getCartItemsCount: () => {},
 };
 
 AppRouter.propTypes = {
   getCurrentUser: PropTypes.func,
+  getCartItemsCount: PropTypes.func,
 };
 
 export default connect(
   null,
-  { getCurrentUser },
+  { getCurrentUser, getCartItemsCount },
 )(AppRouter);
