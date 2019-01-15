@@ -9,23 +9,34 @@ const axiosMock = new MockAdapter(axios, {
   delayResponse: Math.random() * 100,
 });
 
-afterAll(axiosMock.restore);
+describe('<MenuList />', () => {
+  let component;
+  let loadingElem;
+  beforeEach(() => {
+    component = renderWithRedux(<MenuList />);
+    loadingElem = component.queryByTestId('loading');
+  });
+  afterAll(axiosMock.restore);
 
-test('list', async () => {
-  await axiosMock.onGet('/menu').replyOnce(200, [
-    {
-      id: 1,
-      name: 'rice',
-      imgurl: 'https://pix.io/rice.jpg',
-      price: 300,
-    },
-  ]);
+  test('should fetch and display restaurant menu', async () => {
+    await axiosMock.onGet('/menu').replyOnce(200, [
+      {
+        id: 1,
+        name: 'rice',
+        imgurl: 'https://pix.io/rice.jpg',
+        price: 300,
+      },
+    ]);
 
-  const { queryByTestId, container } = renderWithRedux(<MenuList />);
-  const loadingElem = queryByTestId('loading');
+    const { container } = component;
+    await wait(() => expect(loadingElem).not.toBeInTheDocument());
+    expect(loadingElem).not.toBeInTheDocument();
 
-  await wait(() => expect(loadingElem).not.toBeInTheDocument());
-  expect(loadingElem).not.toBeInTheDocument();
+    expect(container.children.length).toBe(1);
+  });
 
-  expect(container.children.length).toBe(1);
+  test('fail to fetch restaurant menu', async () => {
+    await axiosMock.onGet().replyOnce(500);
+    expect(loadingElem).toBeInTheDocument();
+  });
 });
