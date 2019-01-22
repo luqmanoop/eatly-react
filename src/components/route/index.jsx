@@ -7,6 +7,7 @@ import Navbar from '../presentation/Navbar';
 import Login from '../auth/login/Login';
 import Signup from '../auth/signup/Signup';
 import { getCurrentUser, getCartItemsCount } from '../../actions';
+import Order from '../order/Order';
 
 const NoMatch = () => <div>404 not found</div>;
 
@@ -28,6 +29,7 @@ class AppRouter extends Component {
           <main className="main">
             <Switch>
               <Route path="/" exact component={App} />
+              <Route path="/order/:menu" component={Order} />
               <Route path="/login" exact component={Login} />
               <Route path="/register" exact component={Signup} />
               <Route component={NoMatch} />
@@ -40,8 +42,8 @@ class AppRouter extends Component {
 }
 
 AppRouter.defaultProps = {
-  getCurrentUser: () => {},
-  getCartItemsCount: () => {},
+  getCurrentUser: null,
+  getCartItemsCount: null,
 };
 
 AppRouter.propTypes = {

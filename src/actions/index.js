@@ -3,17 +3,31 @@ import authUtils from '../utils/auth';
 import cartUtils from '../utils/cart';
 import {
   GET_ALL_MENU,
+  GET_SELECTED_MENU,
   SIGN_UP,
   LOG_IN,
   GET_CURRENT_USER,
   LOG_OUT,
   ADD_TO_CART,
   CART_ITEMS_COUNT,
+  PLACE_ORDER,
 } from './types';
 
 export const getAllMenu = () => dispatch => axios('/menu')
-  .then(({ data }) => dispatch({ type: GET_ALL_MENU, payload: data.reverse() }))
-  .catch(() => dispatch({ type: GET_ALL_MENU, payload: [] }));
+  .then(({ data }) => {
+    dispatch({ type: GET_ALL_MENU, payload: data.reverse() });
+  })
+  .catch(() => {
+    dispatch({ type: GET_ALL_MENU, payload: [] });
+  });
+
+export const getSelectedMenu = id => dispatch => axios(`/menu/${id}`)
+  .then(({ data }) => {
+    dispatch({ type: GET_SELECTED_MENU, payload: data });
+  })
+  .catch(() => {
+    dispatch({ type: GET_SELECTED_MENU, payload: null });
+  });
 
 export const getCurrentUser = () => dispatch => axios
   .get('/users/me')
@@ -66,3 +80,9 @@ export const addToCart = ({ description, ...menu }) => (dispatch) => {
   dispatch({ type: ADD_TO_CART, payload: cartUtils.getCartItem(newMenu.id) });
   dispatch(getCartItemsCount());
 };
+
+export const placeOrder = data => dispatch => axios.post('/orders', data)
+  .then(() => {
+    dispatch({ type: PLACE_ORDER });
+    return true;
+  }).catch(() => false);

@@ -1,5 +1,7 @@
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { fireEvent } from 'react-testing-library';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import Menu from './Menu';
 import { renderWithRedux } from '../../utils';
 
@@ -11,14 +13,16 @@ describe('<Menu />', () => {
   };
 
   let component = {};
-
+  const history = createMemoryHistory({ initialEntries: ['/'] });
   beforeEach(() => {
-    component = renderWithRedux(<Menu menu={props} />);
+    const ui = <Router history={history}><Menu menu={props} /></Router>;
+    component = renderWithRedux(ui);
   });
 
   test('renders', () => {
-    const { getByTestId } = component;
+    const { getByTestId, getByText, container } = component;
     expect(getByTestId('menu')).toBeInTheDocument();
+    expect(getByText(/rice/i)).toBeInTheDocument();
   });
 
   test('receives props and render children', () => {
@@ -33,7 +37,7 @@ describe('<Menu />', () => {
 
   test('renders composite component', () => {
     const { container } = component;
-    expect(container.querySelectorAll('button.btn.btn-default').length).toBe(2);
+    expect(container.querySelectorAll('.btn-default').length).toBe(2);
   });
 
   test('add to cart', () => {

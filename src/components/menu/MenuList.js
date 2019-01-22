@@ -20,7 +20,6 @@ class MenuList extends Component {
       state: { loading },
       props: { allMenu },
     } = this;
-
     return (
       <div className="restaurant-menu">
         {loading ? (
@@ -36,7 +35,7 @@ class MenuList extends Component {
 }
 
 MenuList.defaultProps = {
-  getAllMenu: () => {},
+  getAllMenu: null,
   allMenu: [],
 };
 
@@ -45,7 +44,7 @@ MenuList.propTypes = {
   allMenu: propTypes.arrayOf(propTypes.object),
 };
 
-const mapStateToProps = ({ allMenu }) => ({ allMenu });
+const mapStateToProps = ({ menu }) => ({ allMenu: menu.all });
 
 export default connect(
   mapStateToProps,
