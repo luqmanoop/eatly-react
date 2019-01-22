@@ -4,12 +4,19 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 
-const Login = ({ user }) => <div>{!user ? <LoginForm /> : <Redirect to="/" />}</div>;
+const Login = ({ user, location }) => {
+  const { from } = location.state || { from: { pathname: '/' } };
+  return <div>{!user ? <LoginForm /> : <Redirect to={from} />}</div>;
+};
 
 Login.defaultProps = {
-  user: null,
+  user: {},
+  location: {},
 };
+
 Login.propTypes = {
   user: PropTypes.oneOfType([PropTypes.object]),
+  location: PropTypes.oneOfType([PropTypes.object]),
 };
+
 export default connect(({ auth }) => ({ user: auth.user || null }))(Login);

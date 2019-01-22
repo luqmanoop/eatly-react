@@ -1,9 +1,9 @@
 import MockAdapter from 'axios-mock-adapter';
 import {
-  getAllMenu, signUp, getCurrentUser, logoutUser, login,
+  getAllMenu, signUp, getCurrentUser, logoutUser, login, placeOrder, getSelectedMenu,
 } from '../src/actions';
 import {
-  GET_ALL_MENU, SIGN_UP, GET_CURRENT_USER, LOG_IN,
+  GET_ALL_MENU, SIGN_UP, GET_CURRENT_USER, LOG_IN, PLACE_ORDER, GET_SELECTED_MENU,
 } from '../src/actions/types';
 import axios from '../src/utils/axiosInstance';
 import authUtils from '../src/utils/auth';
@@ -91,6 +91,43 @@ describe('Redux actions', () => {
       delete payload.user.token;
       expect(dispatch).toHaveBeenCalledTimes(2);
       expect(dispatch).toHaveBeenCalledWith({ type: LOG_IN, payload: { user: payload.user } });
+    });
+  });
+
+  describe('place order', () => {
+    test('should place order successfully', async () => {
+      axiosMock.onPost().replyOnce(200);
+
+      const isPlaced = await placeOrder()(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({ type: PLACE_ORDER });
+      expect(isPlaced).toBeTruthy();
+    });
+
+    test('should place order successfully', async () => {
+      axiosMock.onPost().replyOnce(500);
+
+      const isPlaced = await placeOrder()(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(0);
+      expect(isPlaced).toBeFalsy();
+    });
+  });
+
+  describe('get selected menu', () => {
+    test('should fetch a menu by id', async () => {
+      const payload = { id: 1, name: 'jollof rice' };
+      axiosMock.onGet().replyOnce(200, payload);
+      await getSelectedMenu()(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({ type: GET_SELECTED_MENU, payload });
+    });
+
+    test('fails to fetch a menu by id', async () => {
+      const payload = { id: 1, name: 'jollof rice' };
+      axiosMock.onGet().replyOnce(500, payload);
+      await getSelectedMenu()(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({ type: GET_SELECTED_MENU, payload: null });
     });
   });
 });

@@ -127,13 +127,13 @@ body {
 }
 .main {
   background: #fff;
-  min-height: 95vh;
+  min-height: 100vh;
   padding: 7.8rem 1.6rem;
   position: relative;
 }
 
 a {
-  color: #777777;
+  color: #62A2DC;
 }
 .btn {
   font-size: 1.6rem;
@@ -224,7 +224,7 @@ a {
   background-color: #d32f2f;
 }
 .modal,
-.loader {
+.processing {
   position: fixed;
   z-index: 100;
   top: 0;
@@ -232,11 +232,20 @@ a {
   right: 0;
   bottom: 0;
   display: none;
-  background: rgba(0, 0, 0, 0.4);
   justify-content: center;
   align-items: center;
 }
+.processing {
+  flex-direction: column;
+  padding-bottom: 10rem;
+  margin-top: 5.6rem;
+
+  &>*{
+    margin-bottom: 0.8rem;
+  }
+}
 .modal {
+  background: rgba(0, 0, 0, 0.4);
   padding: 1.6rem;
 }
 .modal-content {
@@ -252,9 +261,15 @@ a {
 .modal-content__btns {
   text-align: right;
 }
+.modal-content__btns > *:not(:last-child) {
+  margin-right: 0.8rem;
+}
 .hint {
   font-size: 1.3rem;
   margin: 0.5rem;
+}
+.show {
+  display: flex;
 }
 @-webkit-keyframes spin {
   to {
@@ -267,6 +282,7 @@ a {
     stroke-dashoffset: -264;
   }
 }
+
 .spinner circle {
   fill: none;
   stroke: slategray;

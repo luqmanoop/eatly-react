@@ -6,7 +6,7 @@ import cartReducer from './cart';
 
 export default combineReducers({
   form: formReducer,
-  allMenu: menuReducer,
+  menu: menuReducer,
   auth: authReducer,
   cart: cartReducer,
 });

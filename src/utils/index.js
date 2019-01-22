@@ -9,7 +9,7 @@ import reducers from '../reducers';
 
 export const renderWithRedux = (
   ui,
-  { store = createStore(reducers, applyMiddleware(thunk)) } = {},
+  { initialState, store = createStore(reducers, initialState, applyMiddleware(thunk)) } = {},
 ) => ({
   ...render(<Provider store={store}>{ui}</Provider>),
   store,

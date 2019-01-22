@@ -22,6 +22,7 @@ describe('Submit login form', () => {
   });
 
   afterEach(axiosMock.reset);
+  afterAll(axiosMock.restore);
 
   const fillSubmitForm = () => {
     fireEvent.change(emailField, { target: { value: 'johndoe@mail.com' } });
