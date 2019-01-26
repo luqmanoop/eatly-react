@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent } from 'react-testing-library';
+import { fireEvent, waitForDomChange } from 'react-testing-library';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import Menu from './Menu';
@@ -20,7 +20,7 @@ describe('<Menu />', () => {
   });
 
   test('renders', () => {
-    const { getByTestId, getByText, container } = component;
+    const { getByTestId, getByText } = component;
     expect(getByTestId('menu')).toBeInTheDocument();
     expect(getByText(/rice/i)).toBeInTheDocument();
   });
@@ -43,5 +43,17 @@ describe('<Menu />', () => {
   test('add to cart', () => {
     const { getByText } = component;
     fireEvent.click(getByText(/add item/i));
+  });
+
+  test('shows edit/delete button for admin', async () => {
+    const ui = (
+      <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
+        <Menu menu={props} />
+      </Router>
+    );
+    const { getByText } = renderWithRedux(ui,
+      { initialState: { auth: { user: { is_admin: true } } } });
+    expect(getByText(/edit/i)).toBeInTheDocument();
+    expect(getByText(/delete/i)).toBeInTheDocument();
   });
 });

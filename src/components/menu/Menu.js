@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -12,10 +12,34 @@ class Menu extends Component {
     dispatchAddToCart(menu);
   };
 
+  renderButtons = () => {
+    const { user, menu } = this.props;
+    const { name, id } = menu;
+    if (user && user.is_admin) {
+      return (
+        <Fragment>
+          <Link className="btn btn-default" to={`/menu/edit?name=${slugify(name, { lower: true })}&id=${id}`}>
+            Edit
+          </Link>
+          <Button handleClick={() => {}} classes="btn-default" title="Delete" />
+        </Fragment>
+      );
+    }
+
+    return (
+      <Fragment>
+        <Link className="btn btn-default" to={`/order/${slugify(name, { lower: true })}?id=${id}`}>
+            Buy now
+        </Link>
+        <Button handleClick={() => this.addToCart(menu)} classes="btn-default" title="Add item" />
+      </Fragment>
+    );
+  }
+
   render() {
     const { menu } = this.props;
     const {
-      id, name, imgurl, price,
+      name, imgurl, price,
     } = menu;
     return (
       <section data-testid="menu" className="menu">
@@ -27,10 +51,7 @@ class Menu extends Component {
         </h3>
         <h4 className="menu__price">{`$${price}`}</h4>
         <div className="menu__btns">
-          <Link className="btn btn-default" to={`/order/${slugify(name, { lower: true })}?id=${id}`}>
-            Buy now
-          </Link>
-          <Button handleClick={() => this.addToCart(menu)} classes="btn-default" title="Add item" />
+          { this.renderButtons() }
         </div>
       </section>
     );
@@ -40,14 +61,18 @@ class Menu extends Component {
 Menu.defaultProps = {
   menu: {},
   dispatchAddToCart: null,
+  user: null,
 };
 
 Menu.propTypes = {
   menu: PropTypes.oneOfType([PropTypes.object]),
   dispatchAddToCart: PropTypes.func,
+  user: PropTypes.oneOfType([PropTypes.object]),
 };
 
+const mapStateToProps = ({ auth: { user } }) => ({ user });
+
 export default connect(
-  null,
+  mapStateToProps,
   { dispatchAddToCart: addToCart },
 )(Menu);

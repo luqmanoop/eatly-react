@@ -8,7 +8,7 @@ export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case AUTHENTICATE:
-      return payload.user
+      return payload && payload.user
         ? { ...payload, isLoggedIn: true }
         : { ...state, ...payload, isLoggedIn: false };
     case LOG_OUT:
