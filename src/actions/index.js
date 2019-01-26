@@ -5,7 +5,6 @@ import {
   GET_ALL_MENU,
   GET_SELECTED_MENU,
   AUTHENTICATE,
-  GET_CURRENT_USER,
   LOG_OUT,
   ADD_TO_CART,
   CART_ITEMS_COUNT,
@@ -27,8 +26,8 @@ export const getSelectedMenu = id => dispatch => axios(`/menu/${id}`)
 
 export const getCurrentUser = () => dispatch => axios
   .get('/users/me')
-  .then(({ data }) => dispatch({ type: GET_CURRENT_USER, payload: data }))
-  .catch(() => dispatch({ type: GET_CURRENT_USER }));
+  .then(({ data }) => dispatch({ type: AUTHENTICATE, payload: { user: data } }))
+  .catch(() => dispatch({ type: AUTHENTICATE }));
 
 export const signUp = formData => dispatch => axios
   .post('/auth/signup', formData)

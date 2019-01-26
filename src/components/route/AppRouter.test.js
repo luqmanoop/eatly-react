@@ -22,7 +22,7 @@ describe('AppRouter', () => {
   );
 
   test('renders properly', async () => {
-    axiosMock.onGet().replyOnce(200);
+    axiosMock.onGet('/users/me').replyOnce(200, { id: 1 });
     const { getByText, container } = renderWithRedux(ui,
       { initialState: { auth: { user: { id: 1 }, isLoggedIn: true } } });
     const logoutButton = getByText(/logout/i);
