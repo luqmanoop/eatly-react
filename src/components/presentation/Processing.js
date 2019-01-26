@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 
 const Processing = ({ children, processing }) => (
-  <div className="processing show">
+  <div className="loading show">
     { processing && <Spinner />}
     {children}
   </div>

@@ -23,13 +23,16 @@ const Navbar = ({ auth, logoutUser: logout, cartCount }) => (
           {auth.user ? (
             <Fragment>
               <li className="link">
+                <Link to="/order/history">My orders</Link>
+              </li>
+              <li className="link">
                 <button onClick={logout}>Logout</button>
               </li>
             </Fragment>
           ) : (
             <Fragment>
               <li className="link">
-                <Link to="/login">Login</Link>
+                <Link to="/login">Log in</Link>
               </li>
               <li className="link">
                 <Link to="/register">Sign up</Link>
@@ -44,7 +47,7 @@ const Navbar = ({ auth, logoutUser: logout, cartCount }) => (
 
 Navbar.defaultProps = {
   auth: null,
-  logoutUser: () => {},
+  logoutUser: null,
   cartCount: 0,
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 
@@ -19,4 +19,4 @@ Login.propTypes = {
   location: PropTypes.oneOfType([PropTypes.object]),
 };
 
-export default connect(({ auth }) => ({ user: auth.user || null }))(Login);
+export default withRouter(connect(({ auth }) => ({ user: auth.user || null }))(Login));

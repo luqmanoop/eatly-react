@@ -1,20 +1,18 @@
 import {
-  GET_CURRENT_USER, SIGN_UP, LOG_OUT, LOG_IN,
+  AUTHENTICATE, LOG_OUT,
 } from '../actions/types';
 
-const initialState = { user: null };
+const initialState = { user: null, isLoggedIn: null };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case SIGN_UP:
-      return payload.user ? payload : { ...state, ...payload };
-    case LOG_IN:
-      return payload.user ? payload : { ...state, ...payload };
-    case GET_CURRENT_USER:
-      return payload ? { user: payload } : state;
+    case AUTHENTICATE:
+      return payload.user
+        ? { ...payload, isLoggedIn: true }
+        : { ...state, ...payload, isLoggedIn: false };
     case LOG_OUT:
-      return { ...state, user: null };
+      return { user: null, isLoggedIn: false };
     default:
       return state;
   }

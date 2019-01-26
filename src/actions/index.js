@@ -4,22 +4,18 @@ import cartUtils from '../utils/cart';
 import {
   GET_ALL_MENU,
   GET_SELECTED_MENU,
-  SIGN_UP,
-  LOG_IN,
+  AUTHENTICATE,
   GET_CURRENT_USER,
   LOG_OUT,
   ADD_TO_CART,
   CART_ITEMS_COUNT,
   PLACE_ORDER,
+  GET_USER_ORDERS,
 } from './types';
 
 export const getAllMenu = () => dispatch => axios('/menu')
-  .then(({ data }) => {
-    dispatch({ type: GET_ALL_MENU, payload: data.reverse() });
-  })
-  .catch(() => {
-    dispatch({ type: GET_ALL_MENU, payload: [] });
-  });
+  .then(({ data }) => dispatch({ type: GET_ALL_MENU, payload: data.reverse() }))
+  .catch(() => dispatch({ type: GET_ALL_MENU, payload: [] }));
 
 export const getSelectedMenu = id => dispatch => axios(`/menu/${id}`)
   .then(({ data }) => {
@@ -38,19 +34,19 @@ export const signUp = formData => dispatch => axios
   .post('/auth/signup', formData)
   .then(({ data: { user: { token, ...user } } }) => {
     authUtils.saveToken(token);
-    dispatch({ type: SIGN_UP, payload: { user } });
+    dispatch({ type: AUTHENTICATE, payload: { user } });
     return getCurrentUser()(dispatch);
   })
-  .catch(error => dispatch({ type: SIGN_UP, payload: { error } }));
+  .catch(error => dispatch({ type: AUTHENTICATE, payload: { error } }));
 
 export const login = credentials => dispatch => axios
   .post('/auth/login', credentials)
   .then(({ data: { user: { token, ...user } } }) => {
     authUtils.saveToken(token);
-    dispatch({ type: LOG_IN, payload: { user } });
+    dispatch({ type: AUTHENTICATE, payload: { user } });
     return getCurrentUser()(dispatch);
   })
-  .catch(error => dispatch({ type: LOG_IN, payload: { error } }));
+  .catch(error => dispatch({ type: AUTHENTICATE, payload: { error } }));
 
 export const logoutUser = () => {
   authUtils.removeToken();
@@ -86,3 +82,7 @@ export const placeOrder = data => dispatch => axios.post('/orders', data)
     dispatch({ type: PLACE_ORDER });
     return true;
   }).catch(() => false);
+
+export const getUserOrders = userId => dispatch => axios.get(`/users/${userId}/orders`)
+  .then(({ data }) => dispatch({ type: GET_USER_ORDERS, payload: data }))
+  .catch(() => dispatch({ type: GET_USER_ORDERS }));

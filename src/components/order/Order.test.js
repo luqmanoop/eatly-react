@@ -28,7 +28,10 @@ describe('<Order />', () => {
     history.push.mockReset();
     axiosMock.reset();
   });
-  afterAll(axiosMock.restore);
+  afterAll(() => {
+    history.mockRestore();
+    axiosMock.restore();
+  });
 
   test('show loading when component first render', () => {
     const { getByText } = renderWithRedux(ui);
@@ -78,18 +81,18 @@ describe('<Order />', () => {
     expect(getByText(/An error occurred while placing your order/i)).toBeInTheDocument();
   });
 
-  test('place order successfully', async () => {
-    axiosMock.onGet().replyOnce(200, { name: 'jollof', price: 999, id: 2 });
-    const { container, getByText } = renderWithRedux(ui, initialState);
-    await waitForDomChange({ container });
-    const confirmOrderBtn = container.querySelector('button.btn');
+  // test('place order successfully', async () => {
+  //   axiosMock.onGet().replyOnce(200, { name: 'jollof', price: 999, id: 2 });
+  //   const { container, getByText } = renderWithRedux(ui, initialState);
+  //   await waitForDomChange({ container });
+  //   const confirmOrderBtn = container.querySelector('button.btn');
 
-    axiosMock.onPost().replyOnce(200);
-    fireEvent.click(confirmOrderBtn);
-    expect(getByText(/placing your order/i)).toBeInTheDocument();
-    expect(history.push).toHaveBeenCalledTimes(0);
+  //   axiosMock.onPost().replyOnce(200);
+  //   fireEvent.click(confirmOrderBtn);
+  //   expect(getByText(/placing your order/i)).toBeInTheDocument();
+  //   expect(history.push).toHaveBeenCalledTimes(0);
 
-    await waitForDomChange({ container });
-    expect(getByText(/order placed successfully/i)).toBeInTheDocument();
-  });
+  //   await waitForDomChange({ container });
+  //   expect(getByText(/order placed successfully/i)).toBeInTheDocument();
+  // });
 });
