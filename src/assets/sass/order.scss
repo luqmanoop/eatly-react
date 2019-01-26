@@ -1,0 +1,181 @@
+  .orders {
+    border-top: 1px solid #f0eeee;
+    margin-left: -1.6rem;
+    margin-right: -1.6rem;
+  }
+
+  .order {
+    display: flex;
+    border-bottom: 1px solid #f0eeee;
+    padding: 1.6rem;
+    align-items: center;
+    
+    > * {
+        margin-right: 0.8rem;
+      }
+  }
+
+  .p-title {
+    padding-bottom: 0.8rem;
+  }
+
+  .highlights {
+    font-size: 1.3rem;
+    display: flex;
+    margin-top: 0.4rem;
+    margin-bottom: 2.8rem;
+    flex-flow: row wrap;
+  }
+
+  .highlight {
+    margin-right: 0.8rem;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        position: relative;
+        top: 0.1rem;
+        margin-right: 0.3rem;
+        border-radius: 50%;
+      }
+  }
+
+  /* START - https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_checkbox */
+  .order__checkbox {
+    align-self: flex-start;
+    display: block;
+    position: relative;
+    padding-left: 2.4rem;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    /* Hide the browser's default checkbox */
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &:checked ~ .checkmark {
+            border: none;
+            color: #fff;
+            padding: 0 0.56rem;
+            background-color: #333;
+
+            /* When the checkbox is checked, add a blue background */
+            &::before {
+                content: '✓';
+              }
+          }
+      }
+
+      /* Create a custom checkbox */
+      .checkmark {
+        position: absolute;
+        top: 0.4rem;
+        left: 0;
+        padding: 0.8rem;
+        border: 2px solid #999;
+      }
+      
+      /* On mouse-over, add a grey background color */
+      &:hover input ~ .checkmark {
+        background: #f0eeee;
+      }
+  }
+  /* END -
+  https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_checkbox
+  */
+  
+  .order__detail {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .order__detail > *:not(:last-child) {
+    margin-bottom: 0.4rem;
+  }
+  .menu-n-status {
+    display: flex;
+  }
+  .order__detail-menu {
+    color: #282a36;
+    font-size: 1.4rem;
+    flex: 1;
+  }
+  .order-status {
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    position: relative;
+    top: 0.5rem;
+  }
+  .highlight.new::before,
+  .order-status.new {
+    background-color: goldenrod;
+  }
+  .highlight.processing::before,
+  .order-status.processing {
+    background-color: #e3e3e3;
+  }
+  .highlight.complete::before,
+  .order-status.complete {
+    background-color: #228b7f;
+  }
+  .order-status.cancelled,
+  .highlight.cancelled::before {
+    background-color: rgb(216, 58, 58);
+  }
+  .order__detail-user,
+  .order__detail-qty,
+  .order__detail-total,
+  .order__detail-contact {
+    font-size: 1.25rem;
+  }
+  .qty-n-total {
+    display: flex;
+    justify-content: space-between;
+  }
+  .order__detail-total {
+    color: #282a36;
+    font-weight: 500;
+  }
+
+
+  .order-status-btns {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #faf9f9;
+    border-top: 1px solid #ddd;
+    padding: 0.8rem;
+    text-align: center;
+    transition: all 0.2s ease-out;
+
+    &.hide {
+        bottom: -8rem;
+      }
+    &.show {
+        bottom: 0;
+      }
+  }
+
+  .selected {
+    background: rgba(240, 238, 238, 0.43);
+  }
+  
+  @media screen and (max-width: 425px) {
+    .highlights {
+      margin: 2rem 0;
+    }
+  }

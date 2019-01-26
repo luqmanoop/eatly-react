@@ -3,8 +3,6 @@ import { render } from 'react-testing-library';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import reducers from '../reducers';
 
 export const renderWithRedux = (
@@ -13,4 +11,15 @@ export const renderWithRedux = (
 ) => ({
   ...render(<Provider store={store}>{ui}</Provider>),
   store,
+});
+
+export const fakeNetworkDelay = (cb, timeout = 500) => {
+  setTimeout(() => {
+    cb();
+  }, timeout);
+}
+
+export const formatPrice = price => parseFloat(price).toLocaleString(undefined, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
 });

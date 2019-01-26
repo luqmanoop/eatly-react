@@ -47,7 +47,8 @@ describe('<MenuList />', () => {
 
   test('fail to fetch restaurant menu', async () => {
     await axiosMock.onGet().replyOnce(500);
-    const { getByTestId } = renderWithRedux(withRouter);
-    expect(getByTestId('loading')).toBeInTheDocument();
+    const { queryByTestId, container } = renderWithRedux(withRouter);
+    await waitForDomChange({ container });
+    expect(queryByTestId('loading')).not.toBeInTheDocument();
   });
 });

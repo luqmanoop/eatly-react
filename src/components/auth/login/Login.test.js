@@ -1,21 +1,30 @@
 import React from 'react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import MockAdapter from 'axios-mock-adapter';
-import { fireEvent, wait } from 'react-testing-library';
+import { fireEvent, wait, waitForDomChange } from 'react-testing-library';
 import { renderWithRedux } from '../../../utils/index';
 import axios from '../../../utils/axiosInstance';
-import Login from './Login';
+import AppRouter from '../../route';
 
 const axiosMock = new MockAdapter(axios, { delayResponse: 500 });
-
+const history = createMemoryHistory({ initialEntries: ['/login'] });
 describe('Submit login form', () => {
   let component;
   let emailField;
   let passwordField;
   let submitButton;
 
+  const ui = (
+    <Router history={history}>
+      <AppRouter />
+    </Router>
+  );
+
   beforeEach(() => {
-    component = renderWithRedux(<Login />);
-    const { container, getByLabelText } = component;
+    component = renderWithRedux(ui, { initialState: { auth: { user: null, isLogged: null } } });
+    const { container, getByLabelText, getByText } = component;
+    fireEvent.click(getByText(/log in/i));
     emailField = getByLabelText(/Email/i);
     passwordField = getByLabelText(/Password/i);
     submitButton = container.querySelector('button[type=submit]');
@@ -31,6 +40,14 @@ describe('Submit login form', () => {
   };
 
   test('with valid credentials', async () => {
+    const payload = { user: { id: 1 } };
+    await axiosMock.onPost().reply(200, payload);
+    fillSubmitForm();
+
+    await waitForDomChange({ container: component.container });
+  });
+
+  test('with invalid credentials', async () => {
     const error = { message: 'Invalid username/password combination' };
     await axiosMock.onPost().reply(500, error);
     fillSubmitForm();

@@ -5,6 +5,7 @@ import { parse } from 'query-string';
 import { Link, withRouter } from 'react-router-dom';
 import Button from '../presentation/Button';
 import { getSelectedMenu, placeOrder } from '../../actions';
+import { fakeNetworkDelay } from '../../utils';
 import Processing from '../presentation/Processing';
 
 class Order extends Component {
@@ -19,15 +20,7 @@ class Order extends Component {
     const menuId = parse(location.search).id || null;
 
     await dispatchGetSelectedMenu(menuId);
-    await this.fakeDelay(1000, () => {
-      this.setState({ isLoading: false });
-    });
-  }
-
-  fakeDelay = (time, cb) => {
-    setTimeout(() => {
-      cb();
-    }, time);
+    await fakeNetworkDelay(() => this.setState({ isLoading: false }));
   }
 
   onPlaceOrder = async (menuId) => {
@@ -39,7 +32,7 @@ class Order extends Component {
 
     const isOrdered = await dispatchPlaceOrder({ menu_id: menuId });
 
-    await this.fakeDelay(1000, () => {
+    await fakeNetworkDelay(() => {
       this.setState({ processing: false });
       this.setState({ successful: isOrdered });
     });

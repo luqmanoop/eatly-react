@@ -54,6 +54,8 @@ body {
   align-items: center;
   .link-group {
     display: flex;
+    align-items: center;
+    
     .g1 {
       flex: 1;
     }
@@ -224,7 +226,7 @@ a {
   background-color: #d32f2f;
 }
 .modal,
-.processing {
+.loading {
   position: fixed;
   z-index: 100;
   top: 0;
@@ -235,7 +237,7 @@ a {
   justify-content: center;
   align-items: center;
 }
-.processing {
+.loading {
   flex-direction: column;
   padding-bottom: 10rem;
   margin-top: 5.6rem;
