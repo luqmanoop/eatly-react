@@ -3,10 +3,11 @@ import {
   getAllMenu, signUp, getCurrentUser, logoutUser, login, placeOrder, getSelectedMenu,
 } from '../src/actions';
 import {
-  GET_ALL_MENU, PLACE_ORDER, GET_SELECTED_MENU, AUTHENTICATE,
+  GET_ALL_MENU, PLACE_ORDER, GET_SELECTED_MENU, AUTHENTICATE, ADD_MENU,
 } from '../src/actions/types';
 import axios from '../src/utils/axiosInstance';
 import authUtils from '../src/utils/auth';
+import { addMenu } from '../src/actions/menu';
 
 const axiosMock = new MockAdapter(axios, { delayResponse: 100 });
 const dispatch = jest.fn();
@@ -140,6 +141,21 @@ describe('Redux actions', () => {
       await getSelectedMenu()(dispatch);
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({ type: GET_SELECTED_MENU, payload: null });
+    });
+  });
+
+  describe('menu', () => {
+    test('adds a menu', async () => {
+      axiosMock.onPost().replyOnce(201);
+      await addMenu()(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({ type: ADD_MENU });
+    });
+
+    test('fails to add/create a menu', async () => {
+      axiosMock.onPost().replyOnce(500);
+      await addMenu()(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(0);
     });
   });
 });

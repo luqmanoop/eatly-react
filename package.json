@@ -31,7 +31,8 @@
     "redux": "4.0.1",
     "redux-form": "8.1.0",
     "redux-thunk": "2.3.0",
-    "slugify": "1.3.4"
+    "slugify": "1.3.4",
+    "toastr": "2.1.4"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
@@ -72,7 +73,8 @@
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/node_modules/**",
-      "!**/vendor/**"
+      "!**/vendor/**",
+      "!<rootDir>/src/index.js"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
