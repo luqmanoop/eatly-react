@@ -9,4 +9,5 @@ export default {
   _minValue3: minValue(3),
   _minValue6: minValue(6),
   _passwordMatch: (confirmPassword, { password }) => (confirmPassword !== password ? 'Passwords do not match' : undefined),
+  _minPrice: value => (typeof parseInt(value, 10) === 'number' && value >= 200 ? undefined : 'Price should start at 200'),
 };

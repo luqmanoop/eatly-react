@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import './assets/sass/style.scss';
+import 'toastr/toastr.scss';
 import reducers from './reducers';
 import AppRouter from './components/route';
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getAllMenu } from '../../actions/index';
 import Menu from './Menu';
 
@@ -18,7 +19,7 @@ class MenuList extends Component {
   render() {
     const {
       state: { loading },
-      props: { allMenu },
+      props: { allMenu, user },
     } = this;
     return (
       <div className="restaurant-menu">
@@ -29,6 +30,7 @@ class MenuList extends Component {
         ) : (
           allMenu.map(menu => <Menu key={menu.id} menu={menu} />)
         )}
+        { user && user.is_admin && <Link className="fab" to="/menu/new">&#43;</Link> }
       </div>
     );
   }
@@ -37,14 +39,21 @@ class MenuList extends Component {
 MenuList.defaultProps = {
   getAllMenu: null,
   allMenu: [],
+  user: null,
 };
 
 MenuList.propTypes = {
-  getAllMenu: propTypes.func,
-  allMenu: propTypes.arrayOf(propTypes.object),
+  getAllMenu: PropTypes.func,
+  allMenu: PropTypes.arrayOf(PropTypes.object),
+  user: PropTypes.oneOfType([PropTypes.object]),
 };
 
-const mapStateToProps = ({ menu }) => ({ allMenu: menu.all });
+const mapStateToProps = ({ menu, auth }) => (
+  {
+    allMenu: menu.all,
+    user: auth.user,
+  }
+);
 
 export default connect(
   mapStateToProps,

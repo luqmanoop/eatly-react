@@ -2,11 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = ({
-  type, label, id, input, meta: { touched, error },
+  type, label, id, input, meta: { touched, error }, ...otherProps
 }) => (
   <div className="input-group">
     <label htmlFor={id}>{label}</label>
-    <input id={id} type={type} {...input} className={touched && error ? 'has-error' : ''} />
+    <input
+      id={id}
+      type={type}
+      {...input}
+      {...otherProps}
+      className={touched && error ? 'has-error' : ''}
+    />
     {touched && error && <span className="error">{error}</span>}
   </div>
 );

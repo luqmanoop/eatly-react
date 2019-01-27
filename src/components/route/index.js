@@ -11,6 +11,7 @@ import Signup from '../auth/signup/Signup';
 import { getCurrentUser, getCartItemsCount } from '../../actions';
 import Order from '../order/Order';
 import OrderHistory from '../order/OrderHistory';
+import AddEditMenu from '../menu/AddEditMenu';
 
 const NoMatch = () => <div data-testid="no-match-screen">Page not found</div>;
 
@@ -35,6 +36,7 @@ class AppRouter extends Component {
               <Route path="/" exact component={App} />
               <Route path="/order/history" component={OrderHistory} />
               <Route path="/order/:menu" component={Order} />
+              <Route path="/menu/new" component={AddEditMenu} />
               <Route path="/login" exact component={Login} />
               <Route path="/register" exact component={Signup} />
               <Route component={NoMatch} />
