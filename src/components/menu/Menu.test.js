@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, waitForDomChange } from 'react-testing-library';
+import { fireEvent } from 'react-testing-library';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import Menu from './Menu';
@@ -11,11 +11,11 @@ describe('<Menu />', () => {
     imgurl: 'https://pix.io/rice.jpg',
     price: 300,
   };
-
+  let ui;
   let component = {};
   const history = createMemoryHistory({ initialEntries: ['/'] });
   beforeEach(() => {
-    const ui = <Router history={history}><Menu menu={props} /></Router>;
+    ui = <Router history={history}><Menu menu={props} /></Router>;
     component = renderWithRedux(ui);
   });
 
@@ -46,14 +46,16 @@ describe('<Menu />', () => {
   });
 
   test('shows edit/delete button for admin', async () => {
-    const ui = (
-      <Router history={createMemoryHistory({ initialEntries: ['/'] })}>
-        <Menu menu={props} />
-      </Router>
-    );
     const { getByText } = renderWithRedux(ui,
       { initialState: { auth: { user: { is_admin: true } } } });
     expect(getByText(/edit/i)).toBeInTheDocument();
     expect(getByText(/delete/i)).toBeInTheDocument();
+  });
+
+  test('clicking on delete button toggles modal', () => {
+    const { getByText } = renderWithRedux(ui, { initialState: { auth: { user: { is_admin: true } } } });
+    fireEvent.click(getByText(/delete/i));
+    expect(getByText(/confirm/i)).toBeInTheDocument();
+    fireEvent.click(getByText(/back/i));
   });
 });

@@ -1,6 +1,7 @@
 export const GET_ALL_MENU = 'GET_ALL_MENU';
 export const GET_SELECTED_MENU = 'GET_SELECTED_MENU';
 export const ADD_MENU = 'ADD_MENU';
+export const DELETE_MENU = 'DELETE_MENU';
 
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOG_OUT = 'LOG_OUT';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { waitForDomChange } from 'react-testing-library';
+import { waitForDomChange, fireEvent } from 'react-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
@@ -18,25 +18,26 @@ describe('<MenuList />', () => {
     </Router>
   );
 
+  const successPayload = [
+    {
+      id: 1,
+      name: 'rice',
+      imgurl: 'https://pix.io/rice.jpg',
+      price: 300,
+    },
+    {
+      id: 2,
+      name: 'jollof',
+      imgurl: 'https://pix.io/rice.jpg',
+      price: 999,
+    },
+  ];
+
   afterEach(axiosMock.reset);
   afterAll(axiosMock.restore);
 
   test('should fetch and display restaurant menu', async () => {
-    const payload = [
-      {
-        id: 1,
-        name: 'rice',
-        imgurl: 'https://pix.io/rice.jpg',
-        price: 300,
-      },
-      {
-        id: 2,
-        name: 'jollof',
-        imgurl: 'https://pix.io/rice.jpg',
-        price: 999,
-      },
-    ];
-    axiosMock.onGet().replyOnce(200, payload);
+    axiosMock.onGet().replyOnce(200, successPayload);
     const { container, getByText, getByTestId } = renderWithRedux(withRouter);
     const loadingElem = getByTestId('loading');
     expect(loadingElem).toBeInTheDocument();
@@ -50,5 +51,21 @@ describe('<MenuList />', () => {
     const { queryByTestId, container } = renderWithRedux(withRouter);
     await waitForDomChange({ container });
     expect(queryByTestId('loading')).not.toBeInTheDocument();
+  });
+
+  test('deletes a menu from list', async () => {
+    axiosMock.onGet().replyOnce(200, successPayload);
+    const { getByText, container } = renderWithRedux(withRouter,
+      { initialState: { auth: { user: { is_admin: true } } } });
+    await waitForDomChange({ container });
+    expect(container.querySelectorAll('.menu').length).toBe(2);
+
+    axiosMock.onDelete().replyOnce(200);
+
+    fireEvent.click(getByText(/delete/i));
+    fireEvent.click(getByText(/confirm/i));
+
+    await waitForDomChange({ container });
+    expect(container.querySelectorAll('.menu').length).toBe(1);
   });
 });
