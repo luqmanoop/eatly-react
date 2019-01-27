@@ -3,11 +3,11 @@ import {
   getAllMenu, signUp, getCurrentUser, logoutUser, login, placeOrder, getSelectedMenu,
 } from '../src/actions';
 import {
-  GET_ALL_MENU, PLACE_ORDER, GET_SELECTED_MENU, AUTHENTICATE, ADD_MENU,
+  GET_ALL_MENU, PLACE_ORDER, GET_SELECTED_MENU, AUTHENTICATE, ADD_MENU, DELETE_MENU,
 } from '../src/actions/types';
 import axios from '../src/utils/axiosInstance';
 import authUtils from '../src/utils/auth';
-import { addMenu } from '../src/actions/menu';
+import { addMenu, deleteMenu } from '../src/actions/menu';
 
 const axiosMock = new MockAdapter(axios, { delayResponse: 100 });
 const dispatch = jest.fn();
@@ -155,6 +155,19 @@ describe('Redux actions', () => {
     test('fails to add/create a menu', async () => {
       axiosMock.onPost().replyOnce(500);
       await addMenu()(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(0);
+    });
+
+    test('deletes a menu', async () => {
+      axiosMock.onDelete().replyOnce(200);
+      await deleteMenu(1)(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({ type: DELETE_MENU, payload: 1 });
+    });
+
+    test('error deleting a menu', async () => {
+      axiosMock.onDelete().replyOnce(500);
+      await deleteMenu(1)(dispatch);
       expect(dispatch).toHaveBeenCalledTimes(0);
     });
   });

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Input from '../presentation/Input';
 import formValidator from '../../utils/formValidator';
 import Button from '../presentation/Button';
+import Processing from '../presentation/Processing';
 
 const { _required, _minValue3, _minPrice } = formValidator;
 
@@ -12,6 +13,7 @@ const AddEditMenuForm = ({
 }) => (
   <form onSubmit={handleSubmit(values => onAddEditMenu(values, reset))}>
     <h1 className="form-title">{`${title} menu`}</h1>
+    { submitting && <Processing processing />}
     <Field
       autoFocus
       placeholder="Jollof rice"

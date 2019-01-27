@@ -1,4 +1,4 @@
-import { GET_ALL_MENU, GET_SELECTED_MENU } from '../actions/types';
+import { GET_ALL_MENU, GET_SELECTED_MENU, DELETE_MENU } from '../actions/types';
 
 const initialState = { all: [], selected: null };
 
@@ -10,6 +10,8 @@ export default (state = initialState, action) => {
       return { ...state, all: payload };
     case GET_SELECTED_MENU:
       return { ...state, selected: payload };
+    case DELETE_MENU:
+      return { ...state, all: state.all.filter(menu => menu.id !== payload) };
     default:
       return { ...state };
   }
