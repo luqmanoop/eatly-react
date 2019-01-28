@@ -1,8 +1,17 @@
-const path = require('path');
 /* eslint-disable */
+const path = require('path');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 /* eslint-enable */
+
+const env = dotenv.config().parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  const prevCopy = { ...prev };
+  prevCopy[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prevCopy;
+}, { });
 
 module.exports = {
   entry: './src/index.js',
@@ -34,6 +43,7 @@ module.exports = {
       template: './public/index.html',
       filename: './index.html',
     }),
+    new webpack.DefinePlugin(envKeys),
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.css'],

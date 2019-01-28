@@ -1,9 +1,9 @@
 import MockAdapter from 'axios-mock-adapter';
 import {
-  getAllMenu, signUp, getCurrentUser, logoutUser, login, placeOrder, getSelectedMenu,
+  getAllMenu, signUp, getCurrentUser, logoutUser, login, placeOrder, getSelectedMenu, cancelOrder,
 } from '../src/actions';
 import {
-  GET_ALL_MENU, PLACE_ORDER, GET_SELECTED_MENU, AUTHENTICATE, ADD_MENU, DELETE_MENU,
+  GET_ALL_MENU, PLACE_ORDER, GET_SELECTED_MENU, AUTHENTICATE, ADD_MENU, DELETE_MENU, CANCEL_ORDER,
 } from '../src/actions/types';
 import axios from '../src/utils/axiosInstance';
 import authUtils from '../src/utils/auth';
@@ -168,6 +168,21 @@ describe('Redux actions', () => {
     test('error deleting a menu', async () => {
       axiosMock.onDelete().replyOnce(500);
       await deleteMenu(1)(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('cancelOrder', () => {
+    test('cancel order successfully', async () => {
+      axiosMock.onDelete().replyOnce(200);
+      await cancelOrder(1)(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({ type: CANCEL_ORDER, payload: 1 });
+    });
+
+    test('fails to cancel order', async () => {
+      axiosMock.onDelete().replyOnce(500);
+      await cancelOrder(1)(dispatch);
       expect(dispatch).toHaveBeenCalledTimes(0);
     });
   });

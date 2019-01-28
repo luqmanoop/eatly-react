@@ -13,3 +13,4 @@ export const CART_ITEMS_COUNT = 'CART_ITEMS_COUNT';
 
 export const PLACE_ORDER = 'PLACE_ORDER';
 export const GET_USER_ORDERS = 'GET_USER_ORDERS';
+export const CANCEL_ORDER = 'CANCEL_ORDER';
