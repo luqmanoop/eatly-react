@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 /* eslint-enable */
 
-const env = dotenv.config().parsed;
+const env = dotenv.config();
 const envKeys = Object.keys(env).reduce((prev, next) => {
   const prevCopy = { ...prev };
   prevCopy[`process.env.${next}`] = JSON.stringify(env[next]);

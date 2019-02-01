@@ -1,12 +1,14 @@
 {
-  "name": "stark-foods",
+  "name": "eatly-react",
   "version": "1.0.0",
   "description": "A food delivery service app for a (fictional) restaurant built using ReactJS",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "build": "webpack --config webpack.prod.js && babel server.js -o dist/server.js",
     "coverage": "jest --coverage",
+    "heroku-postbuild": "npm run build",
+    "start": "node dist/server.js",
+    "start:dev": "webpack-dev-server --config webpack.dev.js",
     "test": "jest"
   },
   "repository": {
@@ -23,6 +25,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "dotenv": "6.2.0",
+    "express": "4.16.4",
     "prop-types": "15.6.2",
     "query-string": "6.2.0",
     "react": "16.7.0",
@@ -36,6 +39,7 @@
     "toastr": "2.1.4"
   },
   "devDependencies": {
+    "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/plugin-proposal-class-properties": "7.2.3",
     "@babel/plugin-transform-runtime": "7.2.0",
