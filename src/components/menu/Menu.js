@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import slugify from 'slugify';
 import Button from '../presentation/Button';
-import { addToCart } from '../../actions';
+import { addToCart } from '../../actions/cart';
 import { deleteMenu } from '../../actions/menu';
 import Modal from '../presentation/Modal';
 

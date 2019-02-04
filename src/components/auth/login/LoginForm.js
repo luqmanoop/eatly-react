@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import InputField from '../../presentation/Input';
 import Button from '../../presentation/Button';
-import { login } from '../../../actions';
+import { login } from '../../../actions/auth';
 
 class LoginForm extends Component {
   onLogin = async (formValues) => {

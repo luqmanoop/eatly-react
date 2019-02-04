@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Input from '../../presentation/Input';
 import Button from '../../presentation/Button';
 import formValidator from '../../../utils/formValidator';
-import { signUp } from '../../../actions';
+import { signUp } from '../../../actions/auth';
 
 const {
   _required, _minValue6, _minValue3, _email, _alphaNumeric, _passwordMatch,
