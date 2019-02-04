@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { formatPrice } from '../../utils';
 import Button from '../presentation/Button';
-import { cancelOrder } from '../../actions';
+import { cancelOrder } from '../../actions/order';
 
 class OrderHistoryItem extends Component {
   onCancelOrder = async (id) => {

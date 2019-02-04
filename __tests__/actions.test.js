@@ -1,13 +1,16 @@
 import MockAdapter from 'axios-mock-adapter';
 import {
-  getAllMenu, signUp, getCurrentUser, logoutUser, login, placeOrder, getSelectedMenu, cancelOrder,
-} from '../src/actions';
+  login, logoutUser, signUp, getCurrentUser,
+} from '../src/actions/auth';
+import {
+  addMenu, getAllMenu, getSelectedMenu, deleteMenu,
+} from '../src/actions/menu';
+import { placeOrder, cancelOrder } from '../src/actions/order';
 import {
   GET_ALL_MENU, PLACE_ORDER, GET_SELECTED_MENU, AUTHENTICATE, ADD_MENU, DELETE_MENU, CANCEL_ORDER,
 } from '../src/actions/types';
 import axios from '../src/utils/axiosInstance';
 import authUtils from '../src/utils/auth';
-import { addMenu, deleteMenu } from '../src/actions/menu';
 
 const axiosMock = new MockAdapter(axios, { delayResponse: 100 });
 const dispatch = jest.fn();

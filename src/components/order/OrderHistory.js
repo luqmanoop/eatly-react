@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect, withRouter } from 'react-router-dom';
-import { getUserOrders } from '../../actions';
+import { getUserOrders } from '../../actions/order';
 import '../../assets/sass/order.scss';
 import OrderHistoryItem from './OrderHistoryItem';
 import { fakeNetworkDelay } from '../../utils';

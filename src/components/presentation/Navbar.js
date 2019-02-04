@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../../assets/images/dish-white.svg';
 import cartIcon from '../../assets/images/shopping_cart.svg';
-import { logoutUser } from '../../actions';
+import { logoutUser } from '../../actions/auth';
 
 const Navbar = ({ auth, logoutUser: logout, cartCount }) => (
   <header className="header">

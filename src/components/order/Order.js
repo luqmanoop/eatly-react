@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { parse } from 'query-string';
 import { Link, withRouter } from 'react-router-dom';
 import Button from '../presentation/Button';
-import { getSelectedMenu, placeOrder } from '../../actions';
+import { placeOrder } from '../../actions/order';
+import { getSelectedMenu } from '../../actions/menu';
 import { fakeNetworkDelay } from '../../utils';
 import Processing from '../presentation/Processing';
 
