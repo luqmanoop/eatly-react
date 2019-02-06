@@ -7,7 +7,13 @@ import {
 } from '../src/actions/menu';
 import { placeOrder, cancelOrder } from '../src/actions/order';
 import {
-  GET_ALL_MENU, PLACE_ORDER, GET_SELECTED_MENU, AUTHENTICATE, ADD_MENU, DELETE_MENU, CANCEL_ORDER,
+  GET_ALL_MENU,
+  PLACE_ORDER,
+  GET_SELECTED_MENU,
+  AUTHENTICATE,
+  ADD_MENU,
+  DELETE_MENU,
+  CANCEL_ORDER,
 } from '../src/actions/types';
 import axios from '../src/utils/axiosInstance';
 import authUtils from '../src/utils/auth';
@@ -49,7 +55,7 @@ describe('Redux actions', () => {
     await axiosMock.onGet().replyOnce(200, {});
     await getCurrentUser()(dispatch);
     expect(dispatch).toHaveBeenCalledTimes(1);
-    expect(dispatch).toHaveBeenCalledWith({ type: AUTHENTICATE, payload: { user: { } } });
+    expect(dispatch).toHaveBeenCalledWith({ type: AUTHENTICATE, payload: { user: {} } });
   });
 
   test('getCurrentUser fails', async () => {
@@ -67,9 +73,10 @@ describe('Redux actions', () => {
       await signUp()(dispatch);
       expect(dispatch).toBeCalledTimes(2);
       delete payload.user.token;
-      expect(dispatch).toHaveBeenCalledWith(
-        { type: AUTHENTICATE, payload: { user: payload.user } },
-      );
+      expect(dispatch).toHaveBeenCalledWith({
+        type: AUTHENTICATE,
+        payload: { user: payload.user },
+      });
     });
 
     test('logoutUser', () => {
@@ -83,7 +90,10 @@ describe('Redux actions', () => {
       await axiosMock.onPost().replyOnce(500, error);
       await signUp()(dispatch);
       expect(dispatch).toBeCalledTimes(1);
-      expect(dispatch).toHaveBeenCalledWith({ type: AUTHENTICATE, payload: { error } });
+      expect(dispatch).toHaveBeenCalledWith({
+        type: AUTHENTICATE,
+        payload: { error: { signup: error.message } },
+      });
     });
   });
 
@@ -94,7 +104,10 @@ describe('Redux actions', () => {
 
       await login()(dispatch);
       expect(dispatch).toHaveBeenCalledTimes(1);
-      expect(dispatch).toHaveBeenCalledWith({ type: AUTHENTICATE, payload: { error } });
+      expect(dispatch).toHaveBeenCalledWith({
+        type: AUTHENTICATE,
+        payload: { error: { login: error.message } },
+      });
     });
 
     test('dispatch login action and get current user', async () => {
@@ -105,8 +118,10 @@ describe('Redux actions', () => {
       expect(authUtils.getToken()).toBe(payload.user.token);
       delete payload.user.token;
       expect(dispatch).toHaveBeenCalledTimes(2);
-      expect(dispatch)
-        .toHaveBeenCalledWith({ type: AUTHENTICATE, payload: { user: payload.user } });
+      expect(dispatch).toHaveBeenCalledWith({
+        type: AUTHENTICATE,
+        payload: { user: payload.user },
+      });
     });
   });
 
