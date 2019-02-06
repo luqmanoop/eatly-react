@@ -13,9 +13,21 @@ const getCartItem = id => getCart()[id];
 
 const saveCart = items => window.localStorage.setItem(cartKey, JSON.stringify(items));
 
+const updateItemQuantity = (item) => {
+  const menu = { ...item };
+  const exisitingMenu = getCartItem(menu.id);
+  if (exisitingMenu) {
+    menu.qty = exisitingMenu.qty + 1;
+  } else {
+    menu.qty = 1;
+  }
+  return { ...getCart(), [menu.id]: menu };
+};
+
 export default {
   getCart,
   getCartCount,
   getCartItem,
   saveCart,
+  updateItemQuantity,
 };

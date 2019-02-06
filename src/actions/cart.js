@@ -7,20 +7,10 @@ export const getCartItemsCount = () => ({
 });
 
 export const addToCart = ({ description, ...menu }) => (dispatch) => {
-  const cartItems = cartUtils.getCart();
   const newMenu = { ...menu };
-  if (!cartItems) {
-    newMenu.qty = 1;
-    cartUtils.saveCart({ [newMenu.id]: newMenu });
-  } else {
-    if (cartUtils.getCartItem(newMenu.id)) {
-      cartItems[newMenu.id].qty += 1;
-    } else {
-      newMenu.qty = 1;
-      cartItems[newMenu.id] = newMenu;
-    }
-    cartUtils.saveCart(cartItems);
-  }
+  const cartItems = cartUtils.updateItemQuantity(newMenu);
+  cartUtils.saveCart(cartItems);
+
   dispatch({ type: ADD_TO_CART, payload: cartUtils.getCartItem(newMenu.id) });
   dispatch(getCartItemsCount());
 };
