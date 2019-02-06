@@ -28,6 +28,7 @@ h4,
 h5,
 h6 {
   color: #333;
+  letter-spacing: 0.06rem;
 }
 
 body {
@@ -55,7 +56,7 @@ body {
   .link-group {
     display: flex;
     align-items: center;
-    
+
     .g1 {
       flex: 1;
     }
@@ -135,7 +136,7 @@ body {
 }
 
 a {
-  color: #62A2DC;
+  color: #62a2dc;
 }
 .btn {
   font-size: 1.6rem;
@@ -242,7 +243,7 @@ a {
   padding-bottom: 10rem;
   margin-top: 5.6rem;
 
-  &>*{
+  & > * {
     margin-bottom: 0.8rem;
   }
 }

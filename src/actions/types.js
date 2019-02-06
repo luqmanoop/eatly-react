@@ -10,6 +10,7 @@ export const GET_CURRENT_USER = 'GET_CURRENT_USER';
 
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const CART_ITEMS_COUNT = 'CART_ITEMS_COUNT';
+export const GET_CART_ITEMS = 'GET_CART_ITEMS';
 
 export const PLACE_ORDER = 'PLACE_ORDER';
 export const GET_USER_ORDERS = 'GET_USER_ORDERS';

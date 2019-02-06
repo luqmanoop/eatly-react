@@ -1,0 +1,47 @@
+.carts {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 1.6rem 0.8rem;
+
+  .cart-items {
+    margin: 0 0 4rem;
+  }
+
+  .sum-total {
+    font-size: 2.2rem;
+    text-align: right;
+
+    span {
+      color: #333;
+    }
+  }
+  .cart-action-btns {
+    margin: 4rem 0;
+    display: flex;
+    justify-content: flex-end;
+
+    > *:not(:last-child) {
+      margin-right: 0.8rem;
+    }
+  }
+}
+
+@media screen and (max-width: 35rem) {
+  .carts {
+    .cart-items {
+      margin-bottom: 2rem;
+    }
+
+    .sum-total {
+      font-size: 1.8rem;
+    }
+
+    .cart-action-btns {
+      margin-top: 2rem;
+
+      .btn {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
