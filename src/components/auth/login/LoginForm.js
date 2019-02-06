@@ -18,7 +18,9 @@ class LoginForm extends Component {
       <form className="form login" onSubmit={handleSubmit(this.onLogin)}>
         <h1 className="form-title">Login</h1>
         <h3 className="form-sub-title">Enjoy Eatly fast food delivered to your doorstep</h3>
-        {auth && auth.error && <p className="form-error">{auth.error.message}</p>}
+        {auth && auth.error && (
+          <p className={auth.error.login ? 'form-error' : ''}>{auth.error.login}</p>
+        )}
         <Field name="email" id="email" label="Email" component={InputField} type="email" />
         <Field
           name="password"

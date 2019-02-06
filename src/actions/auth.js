@@ -14,7 +14,10 @@ export const signUp = formData => dispatch => axios
     dispatch({ type: AUTHENTICATE, payload: { user } });
     return getCurrentUser()(dispatch);
   })
-  .catch(error => dispatch({ type: AUTHENTICATE, payload: { error } }));
+  .catch(({ message }) => dispatch({
+    type: AUTHENTICATE,
+    payload: { error: { signup: message } },
+  }));
 
 export const login = credentials => dispatch => axios
   .post('/auth/login', credentials)
@@ -23,7 +26,10 @@ export const login = credentials => dispatch => axios
     dispatch({ type: AUTHENTICATE, payload: { user } });
     return getCurrentUser()(dispatch);
   })
-  .catch(error => dispatch({ type: AUTHENTICATE, payload: { error } }));
+  .catch(({ message }) => dispatch({
+    type: AUTHENTICATE,
+    payload: { error: { login: message } },
+  }));
 
 export const logoutUser = () => {
   authUtils.removeToken();
