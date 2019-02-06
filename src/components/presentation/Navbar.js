@@ -16,7 +16,7 @@ const Navbar = ({ auth, logoutUser: logout, cartCount }) => (
           </Link>
         </span>
         <div className="link-group">
-          <Link to="/" className="link cart">
+          <Link to="/cart" className="link cart">
             <img src={cartIcon} className="btn cart-icon" alt="cart icon" />
             <span className="cart-counter">{cartCount}</span>
           </Link>

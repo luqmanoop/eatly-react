@@ -1,7 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import {
-  BrowserRouter as Router, Route, Switch,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import App from '../App';
@@ -13,6 +11,7 @@ import { getCartItemsCount } from '../../actions/cart';
 import Order from '../order/Order';
 import OrderHistory from '../order/OrderHistory';
 import AddEditMenu from '../menu/AddEditMenu';
+import Cart from '../cart/Cart';
 
 const NoMatch = () => <div data-testid="no-match-screen">Page not found</div>;
 
@@ -35,6 +34,7 @@ class AppRouter extends Component {
           <main className="main">
             <Switch>
               <Route path="/" exact component={App} />
+              <Route path="/cart" component={Cart} />
               <Route path="/order/history" component={OrderHistory} />
               <Route path="/order/:menu" component={Order} />
               <Route path="/menu/new" component={AddEditMenu} />
