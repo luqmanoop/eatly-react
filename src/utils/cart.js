@@ -24,10 +24,15 @@ const updateItemQuantity = (item) => {
   return { ...getCart(), [menu.id]: menu };
 };
 
+const clearCart = () => {
+  localStorage.removeItem(cartKey);
+};
+
 export default {
   getCart,
   getCartCount,
   getCartItem,
   saveCart,
   updateItemQuantity,
+  clearCart,
 };

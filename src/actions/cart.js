@@ -1,4 +1,6 @@
-import { ADD_TO_CART, CART_ITEMS_COUNT, GET_CART_ITEMS } from './types';
+import {
+  ADD_TO_CART, CART_ITEMS_COUNT, GET_CART_ITEMS, CLEAR_CART,
+} from './types';
 import cartUtils from '../utils/cart';
 
 export const getCartItemsCount = () => ({
@@ -18,4 +20,9 @@ export const addToCart = ({ description, ...menu }) => (dispatch) => {
 export const getCartItems = () => {
   const cartItems = cartUtils.getCart();
   return { type: GET_CART_ITEMS, payload: cartItems };
+};
+
+export const clearCart = () => {
+  cartUtils.clearCart();
+  return { type: CLEAR_CART };
 };
