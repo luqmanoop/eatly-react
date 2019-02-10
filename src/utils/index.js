@@ -13,7 +13,7 @@ export const renderWithRedux = (
   store,
 });
 
-export const fakeNetworkDelay = (cb, timeout = 350) => {
+export const fakeNetworkDelay = (cb, timeout = 500) => {
   setTimeout(() => {
     cb();
   }, timeout);

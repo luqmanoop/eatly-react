@@ -12,7 +12,8 @@ import Order from '../order/Order';
 import OrderHistory from '../order/OrderHistory';
 import AddEditMenu from '../menu/AddEditMenu';
 import Cart from '../cart/Cart';
-import NotFound from '../presentation/NotFound';
+
+const NoMatch = () => <div data-testid="no-match-screen">Page not found</div>;
 
 class AppRouter extends Component {
   componentDidMount() {
@@ -39,7 +40,7 @@ class AppRouter extends Component {
               <Route path="/menu/new" component={AddEditMenu} />
               <Route path="/login" exact component={Login} />
               <Route path="/register" exact component={Signup} />
-              <Route component={NotFound} />
+              <Route component={NoMatch} />
             </Switch>
           </main>
         </Fragment>

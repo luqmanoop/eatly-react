@@ -4,12 +4,8 @@ import PropTypes from 'prop-types';
 const Modal = (props) => {
   const {
     config: {
-      title,
-      message,
-      onNegativeClick,
-      onPositiveClick,
-      negativeTitle = 'Cancel',
-      positiveTitle,
+      title, message, onNegativeClick, onPositiveClick,
+      negativeTitle = 'Cancel', positiveTitle,
     },
   } = props;
 
@@ -19,12 +15,8 @@ const Modal = (props) => {
         <h3 className="modal-content__title">{title}</h3>
         <p className="modal-content__msg">{message}</p>
         <div className="modal-content__btns">
-          <button onClick={onNegativeClick} className="negative btn btn-default">
-            {negativeTitle}
-          </button>
-          <button onClick={onPositiveClick} className="positive btn btn-danger">
-            {positiveTitle}
-          </button>
+          <button onClick={onNegativeClick} className="negative btn btn-default">{negativeTitle}</button>
+          <button onClick={onPositiveClick} className="positive btn btn-danger">{positiveTitle}</button>
         </div>
       </div>
     </div>

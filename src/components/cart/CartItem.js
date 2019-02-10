@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formatPrice } from '../../utils';
 import './CartItem.scss';
+import Button from '../presentation/Button';
 
 const CartItem = ({ cart }) => {
   const {
@@ -18,6 +19,7 @@ const CartItem = ({ cart }) => {
         </p>
       </div>
       <img src={imgurl} alt={name} />
+      <Button classes="btn btn-default" title="remove" />
     </div>
   );
 };

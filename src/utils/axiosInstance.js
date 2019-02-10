@@ -2,7 +2,7 @@ import axios from 'axios';
 import authUtils from './auth';
 
 const instance = axios.create({
-  baseURL: process.env.API_URL || 'http://localhost:8000/api/v1/',
+  baseURL: process.env.API_URL || 'https://eatly-api.herokuapp.com/api/v1',
 });
 
 instance.interceptors.request.use((config) => {

@@ -1,14 +1,11 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { waitForDomChange, cleanup, fireEvent } from 'react-testing-library';
-import MockAdapter from 'axios-mock-adapter';
-import axios from '../../utils/axiosInstance';
+import { waitForDomChange, cleanup } from 'react-testing-library';
 import { renderWithRedux } from '../../utils';
 import cartUtils from '../../utils/cart';
 import Cart from './Cart';
 
-const axiosMock = new MockAdapter(axios, { delayResponse: 100 });
 cartUtils.getCart = jest.fn().mockImplementation(() => ({
   3: {
     id: 3,
@@ -38,23 +35,7 @@ describe('<Cart />', () => {
     expect(getByText(/mock name/i)).toBeInTheDocument();
 
     cleanup();
-  });
 
-  test('it should confirm order & make payment', async () => {
-    const { getByText, container } = renderWithRedux(ui,
-      { initialState: { auth: { isLoggedIn: true } } });
-    await waitForDomChange({ container });
-    axiosMock.onPost().replyOnce(200);
-    fireEvent.click(getByText(/confirm & pay/i));
-    await waitForDomChange({ container });
-  });
-
-  test('it should fail to place order for items in cart', async () => {
-    const { getByText, container } = renderWithRedux(ui,
-      { initialState: { auth: { isLoggedIn: true } } });
-    await waitForDomChange({ container });
-    axiosMock.onPost().replyOnce(500);
-    fireEvent.click(getByText(/confirm & pay/i));
-    await waitForDomChange({ container });
+    renderWithRedux(ui, { initialState: { auth: { isLoggedIn: true } } });
   });
 });
