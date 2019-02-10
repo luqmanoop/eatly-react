@@ -1,4 +1,6 @@
-import { ADD_TO_CART, CART_ITEMS_COUNT, GET_CART_ITEMS } from '../actions/types';
+import {
+  ADD_TO_CART, CART_ITEMS_COUNT, GET_CART_ITEMS, CLEAR_CART,
+} from '../actions/types';
 
 const initialState = { items: {}, count: 0 };
 export default (state = initialState, action) => {
@@ -10,6 +12,8 @@ export default (state = initialState, action) => {
       return { ...state, count: payload };
     case GET_CART_ITEMS:
       return { ...state, items: payload };
+    case CLEAR_CART:
+      return initialState;
     default:
       return state;
   }
