@@ -16,13 +16,13 @@ import NotFound from '../presentation/NotFound';
 
 class AppRouter extends Component {
   componentDidMount() {
-    const {
-      getCurrentUser: dispatchGetCurrentUser,
-      getCartItemsCount: dispatchGetCartItemsCount,
-    } = this.props;
+    // const {
+    //   getCurrentUser: dispatchGetCurrentUser,
+    //   getCartItemsCount: dispatchGetCartItemsCount,
+    // } = this.props;
 
-    dispatchGetCurrentUser();
-    dispatchGetCartItemsCount();
+    // dispatchGetCurrentUser();
+    // dispatchGetCartItemsCount();
   }
 
   render() {
@@ -54,8 +54,8 @@ AppRouter.defaultProps = {
 };
 
 AppRouter.propTypes = {
-  getCurrentUser: PropTypes.func,
-  getCartItemsCount: PropTypes.func,
+  getCurrentUser: PropTypes.func, // eslint-disable-line
+  getCartItemsCount: PropTypes.func, // eslint-disable-line
 };
 
 export default connect(
